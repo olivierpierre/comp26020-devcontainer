@@ -1,18 +1,10 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	"name": "comp26020-devcontainer",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "olivierpierre/comp26020-devcontainer",
 
 	"customizations": {
-        // Configure properties specific to VS Code.
         "vscode": {
-          // Add the IDs of extensions you want installed when the container is created.
           "extensions": ["jeff-hykin.better-cpp-syntax", "ms-vscode.cpptools", "ms-vscode.cpptools-extension-pack", "ms-vscode.cpptools-themes"]
         }
       }
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
 }
