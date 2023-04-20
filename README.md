@@ -28,7 +28,7 @@ seen in the course.
 
 1. Install [VSCode](https://code.visualstudio.com/download) and get the
   [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-  and [GitHub] extensions
+  extension
 2. Install [Docker](https://docs.docker.com/get-docker/)
 3. Make sure Docker is running, Launch VSCode and bring up the command palette
    with the following command:
