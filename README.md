@@ -6,7 +6,12 @@ the C part of COMP26020.
 
 ## How to Download and Run the Examples
 
-### Using Linux Natively/in a VM
+There are 3 ways to run the examples:
+- [Using Linux natively or in a VM](#using-linux-natively-or-in-a-vm)
+- [Using VSCode and Docker on Windows or Mac](#using-vscode-and-docker-on-windows-or-mac)
+- [Using GitHub Codespaces in your browser with any OS](using-github-codespaces-in-your-browser)
+
+### Using Linux Natively or in a VM
 
 We will use for marking the lab exercise Ubuntu 22.04, so you should use it too.
 You'll need the following debian packages:
@@ -24,7 +29,7 @@ is the blue link at the bottom right of the snippet (in the example below it is
 That should launch the download of the file, you cna them compile and run as
 seen in the course.
 
-### Using VSCode + Docker on Windows/Mac
+### Using VSCode and Docker on Windows or Mac
 
 1. Install [VSCode](https://code.visualstudio.com/download) and get the
   [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
@@ -45,7 +50,6 @@ launch. It is based on Ubuntu 22.04.
 **This is a volatile enviroment and all your modifications to the container's
 filesystem will be lost when you exit this VSCode window, hence it is *not* a
 good environment for working on lab exercises.**
-
 
 ### Using GitHub Codespaces in your Browser
 
