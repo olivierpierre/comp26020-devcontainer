@@ -9,7 +9,7 @@ the C part of COMP26020.
 There are 3 ways to run the examples:
 - [Using Linux natively or in a VM](#using-linux-natively-or-in-a-vm)
 - [Using VSCode and Docker on Windows or Mac](#using-vscode-and-docker-on-windows-or-mac)
-- [Using GitHub Codespaces in your browser with any OS](using-github-codespaces-in-your-browser)
+- [Using GitHub Codespaces in your browser with any OS](#using-github-codespaces-in-your-browser)
 
 ### Using Linux Natively or in a VM
 
