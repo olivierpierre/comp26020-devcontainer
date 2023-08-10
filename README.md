@@ -14,10 +14,12 @@ There are 3 ways to run the examples:
 ### Using Linux Natively or in a VM
 
 We will use for marking the lab exercise Ubuntu 22.04, so you should use it too.
-You'll need the following debian packages:
+You'll need to install the following debian and python packages:
 ```
 sudo apt-get update && sudo apt-get install -y build-essential valgrind \
     python3 vim bash-completion git gdb python3-pip
+
+pip3 install check50
 ```
 
 If you are browsing the slides online, simply click on the snippet name, which
