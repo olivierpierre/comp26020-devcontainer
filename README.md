@@ -26,7 +26,7 @@ is the blue link at the bottom right of the snippet (in the example below it is
 
 <img width="300" src="include/sample-snippet.png">
 
-That should launch the download of the file, you cna them compile and run as
+That should launch the download of the file, you can them compile and run as
 seen in the course.
 
 ### Using VSCode and Docker on Windows or Mac
