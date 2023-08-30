@@ -64,5 +64,5 @@ Go to the repository page on GitHub, and click on `Use this template` then
 
 <img width="800" src="include/launch-codespaces.png" href="include/launch-codespaces.png">
 
-**This is also a volatile enviroment and it is *not* a good one for working on
-lab exercises.**
+Files created in the codespace will persist until the codespace is deleted (this can
+be done through the this interface: https://github.com/codespaces).
