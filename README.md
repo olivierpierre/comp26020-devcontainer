@@ -4,6 +4,10 @@ This repository contains running examples for all the code snippets presented
 in the [lecture slides](https://olivierpierre.github.io/comp26020-lectures/) of
 the C part of COMP26020.
 
+Here we describe several ways to set up an environment to do these exercises.
+These environments can also be used to work on the formative and summative
+exercises.
+
 ## How to Download and Run the Examples
 
 There are 3 ways to run the examples:
@@ -51,7 +55,7 @@ launch. It is based on Ubuntu 22.04.
 
 **This is a volatile enviroment and all your modifications to the container's
 filesystem will be lost when you exit this VSCode window, hence it is *not* a
-good environment for working on lab exercises.**
+good environment for working on summative (or complex formative) exercises.**
 
 ### Using GitHub Codespaces in your Browser
 
