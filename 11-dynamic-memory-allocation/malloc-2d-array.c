@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main(int argc, char **argv) {
-    int a = 3; int b = 5;
+    int a = 3; int b = 2;
     int **array;
 
     array = malloc(a * sizeof(int *));

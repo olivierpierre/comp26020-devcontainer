@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     printf("Please input an integer:\n");
     scanf("%d", &int1);
 
-    printf("Please input a float:\n");
+    printf("Please input a double:\n");
     scanf("%lf", &double1); /* make sure to us %lf for double and %f for float */
 
     printf("Please enter an integer and a float separated by a space\n");
