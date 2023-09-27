@@ -1,6 +1,9 @@
 (* To compile and run on the Linux command line:
+ * sudo apt install ocaml
  * ocamlc graphics.cma functional.ml -o functional-ocaml
  * ./functional-ocaml
+ * Note that you need a graphical environment to run that example, so it won't
+ * work in e.g. GitHub codespaces
  *)
 open Graphics;;
 
