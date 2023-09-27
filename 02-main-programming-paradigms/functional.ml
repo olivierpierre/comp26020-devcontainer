@@ -1,6 +1,6 @@
 (* To compile and run on the Linux command line:
- * ocamlc graphics.cma listing8.ml -o listing8
- * ./listing8
+ * ocamlc graphics.cma functional.ml -o functional-ocaml
+ * ./functional-ocaml
  *)
 open Graphics;;
 

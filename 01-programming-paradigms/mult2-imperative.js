@@ -1,5 +1,5 @@
 // To launch this script on the Linux command line use node:
-// node listing4.js
+// node node mult2-imperative.js
 
 function mult_by_two_imperative (array) {
   let results = []

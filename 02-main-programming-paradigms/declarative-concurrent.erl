@@ -1,10 +1,10 @@
 % To compile and run on the Linux command line,
 % (on debian-based systems such as mint):
 % sudo apt install erlang
-% erlc listing9.erl
-% erl -noshell -s listing9 start -s init stop
+% erlc declarative-concurrent.erl
+% erl -noshell -s declarative-concurrent start -s init stop
 
--module(listing9).
+-module(mymodule).
 -export([start/0, server/0, client/1]).
 
 server() ->
@@ -28,6 +28,6 @@ client(ServerPID) ->
     end.
 
 start() ->
-    Pid1 = spawn(listing9, server, []),
-    spawn(listing9, client, [Pid1]),
+    Pid1 = spawn(mymodule, server, []),
+    spawn(mymodule, client, [Pid1]),
     timer:sleep(3).

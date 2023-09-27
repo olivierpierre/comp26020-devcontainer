@@ -1,6 +1,6 @@
 /* To compile and run on the Linux command line:
- * gcc listing1.c -o listing1
- * ./listing1
+ * gcc hello-world.c -o hello-world
+ * ./hello-world
  */
 
 #include <stdio.h>

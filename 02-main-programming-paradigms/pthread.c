@@ -1,6 +1,6 @@
 /* To compile and run with the Linux command line:
- * gcc listing6.c -o listing6 -lpthread
- * ./listing6
+ * gcc pthread.c -o pthread -lpthread
+ * ./pthread
  */
 
 #define _GNU_SOURCE

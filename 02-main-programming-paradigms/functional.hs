@@ -1,6 +1,6 @@
 -- To compile and run on the Linux command line:
--- ghc listing10.hs
--- ./listing10
+-- ghc functional.hs
+-- ./functional
 
 add_10 x = x + 10
 

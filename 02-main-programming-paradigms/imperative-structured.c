@@ -1,6 +1,6 @@
 /* To compile and execute on the Linux command line:
- * gcc listing2.c -o listing2
- * ./lising2
+ * gcc imperative-structured.c -o imperative-structured
+ * ./imperative-structured
  */
 
 #include <stdio.h>

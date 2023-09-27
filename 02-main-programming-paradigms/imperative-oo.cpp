@@ -1,6 +1,6 @@
 /* To compile and run:
- * g++ listing3.cpp -o listing3
- * ./listing3
+ * g++ imperative-oo.cpp -o imperative-oo-cpp
+ * ./imperative-oo-cpp
  */
 
 #include <iostream>

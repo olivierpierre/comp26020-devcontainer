@@ -1,5 +1,5 @@
 // To launch this script on the Linux command line use node:
-// node listing5.js
+// node mult2-declarative.js
 
 function mult_by_two_declarative (array) {
     return array.map((item) => item * 2)

@@ -1,4 +1,4 @@
-/* listing2.c, illustrate the use of comments */
+/* comments.c, illustrate the use of comments */
 
 #include <stdio.h> // necessary to get access to printf
 

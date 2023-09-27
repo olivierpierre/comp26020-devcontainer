@@ -1,6 +1,6 @@
 // Print to the standard output without the C library, directly making a
 // write syscall to stdout file desccriptor (by convention 1)
-// compile as follows: gcc -nostdlib listing1.c -o listing1
+// compile as follows: gcc -nostdlib nolibc.c -o nolibc
 
 /* Without libc the default entry point is _start */
 void _start() {

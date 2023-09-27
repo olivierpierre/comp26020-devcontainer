@@ -1,8 +1,8 @@
 // To compile and run on the Linux command line
 // (on debian-based systems such as mint):
 // sudo apt install mono-devel
-// mcs listing11.cs
-// mono listing11.exe
+// mcs imperative-oo.cs
+// mono imperative-oo.exe
 
 using System;
 
