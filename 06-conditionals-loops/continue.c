@@ -1,13 +1,16 @@
 #include <stdio.h>
 
 int main() {
+    int i = 0;
 
-    for(int i = 0; i < 10; i = i +1) {
-        printf("iteration %d\n", i);
+    while(i < 10) {
+        i = i + 1;
 
         if(i == 5) {
-            break;
+            continue;
         }
+
+        printf("iteration %d\n", i);
     }
 
     return 0;
