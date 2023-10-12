@@ -10,7 +10,7 @@ typedef struct {
 int main(int argc, char **argv) {
     mystruct ms = {1, 2.0};
 
-    printf("ms address is: 0x%lx, glob address is 0x%lx\n", &ms, &glob);
+    printf("ms address is: %p, glob address is %p\n", &ms, &glob);
     return 0;
 }
 
