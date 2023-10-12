@@ -13,7 +13,7 @@ int multiply_and_divide(int n1, int n2, int *product, int *quotient) {
 }
 
 int main(int argc, char **argv) {
-    int a = 5, b = 10;
+    int a = 10, b = 5;
     int product, quotient;
 
     if(multiply_and_divide(a, b, &product, &quotient) == 0) {
