@@ -68,7 +68,7 @@ account.
 Go to the repository page on GitHub, and click on `Use this template` then
 `Open in a codespace`.
 
-<img width="800" src="include/launch-codespaces.png" href="include/launch-codespaces.png">
+<img width="300" src="include/launch-codespaces.png" href="include/launch-codespaces.png">
 
 Files created in the codespace will persist until the codespace is deleted (this can
 be done through the this interface: https://github.com/codespaces).
