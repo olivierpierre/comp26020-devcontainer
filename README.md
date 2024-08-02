@@ -4,9 +4,9 @@ This repository contains running examples for all the code snippets presented
 in the [lecture slides](https://olivierpierre.github.io/comp26020-lectures/) of
 the C part of COMP26020.
 
-Here we describe several ways to set up an environment to do these exercises.
-These environments can also be used to work on the formative and summative
-exercises.
+Here we describe several ways to set up an environment to run these code
+samples. The environments described here can also be used to work on the
+formative and summative exercises.
 
 ## How to Download and Run the Examples
 
