@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
 
     float float_res = int1 + float1;
     float float_res2 = int1 * (float1 + int2);
-    int int_res = int1 * (float1 + int2);
+    int int_res = int1 + float1;
 
     printf("float result:   %f\n", float_res);
     printf("float result2:   %f\n", float_res2);
