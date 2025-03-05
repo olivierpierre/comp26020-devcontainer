@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
     char *string2 = string1;   // this is not a string copy!
     char string3[10];
 
-    /* not super safe, what happen if string1 > string3? */
+    /* not super safe, what happens if string1 > string3? */
     strcpy(string3, string1);
 
     /* better */
