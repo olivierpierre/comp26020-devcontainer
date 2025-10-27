@@ -1,4 +1,4 @@
-/* This example is a bit less complicated than the stack smashing one.
+/* THis example is a bit less complicated than the stack smashing one.
  * First you need to compile the executable statically to have a deterministic
  * and easy to identify address for security_critical_function:
  * gcc use-after-free.c -g -o use-after-free -static
@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
     /* allocate and init ms */
     my_struct *ms = malloc(sizeof(my_struct));
     ms->member1 = 42.0; ms->member2 = 42.0;
-    ms->member3 = &print_hello;
+    ms->member3 = print_hello;
 
     /* call the function pointer */
     ms->member3(12);

