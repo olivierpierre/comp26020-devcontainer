@@ -1,7 +1,6 @@
 {
 	"name": "comp26020-devcontainer",
 	"image": "olivierpierre/comp26020-devcontainer",
-	"mounts": [{ "source": "comp26020-volume", "target": "/root", "type": "volume" }],
 
 	"customizations": {
         "vscode": {
