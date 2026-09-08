@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 
     if(!strcmp(entered_password, password)) {
         printf("Passowrd ok!\n");
-    /* ... */
+        /* ... */
     } else {
         printf("Wrong password! aborting\n");
     }

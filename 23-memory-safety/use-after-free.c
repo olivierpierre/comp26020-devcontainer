@@ -1,4 +1,4 @@
-/* THis example is a bit less complicated than the stack smashing one.
+/* This example is a bit less complicated than the stack smashing one.
  * First you need to compile the executable statically to have a deterministic
  * and easy to identify address for security_critical_function:
  * gcc use-after-free.c -g -o use-after-free -static
