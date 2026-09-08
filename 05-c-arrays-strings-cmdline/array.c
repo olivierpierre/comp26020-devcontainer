@@ -13,5 +13,9 @@ int main() {
     printf("array[%d] contains %d\n", 2, array[2]);
     printf("array[%d] contains %d\n", 3, array[3]);
 
+    int x = array[1];
+
+    printf("x is %d\n", x);
+
     return 0;
 }
