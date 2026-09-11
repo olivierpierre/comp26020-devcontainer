@@ -6,7 +6,7 @@ the C part of COMP26020.
 
 Here we describe several ways to set up an environment to run these code
 samples. The environments described here can also be used to work on the
-formative and summative exercises.
+formative exercises.
 
 ## How to Download and Run the Examples
 
@@ -17,7 +17,7 @@ There are 3 ways to run the examples:
 
 ### Using Linux Natively or in a VM
 
-We will use for marking the lab exercise Ubuntu 22.04, so you should use it too.
+We strongly reocmmend Ubuntu 24.04.
 You'll need to install a few Debian and Python packages with the following commands:
 ```
 sudo apt-get update && sudo apt-get install -y build-essential valgrind \
@@ -54,10 +54,6 @@ seen in the course.
 
 The container image will take a bit of time to be fetched during the first
 launch. It is based on Ubuntu 22.04.
-
-**This is a volatile enviroment and all your modifications to the container's
-filesystem will be lost when you exit this VSCode window, hence it is *not* a
-good environment for working on summative (or complex formative) exercises.**
 
 ### Using GitHub Codespaces in your Browser
 
