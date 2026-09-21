@@ -15,6 +15,7 @@ Based on your situation there are 3 ways to set it up:
 
 We will use for marking the lab exercise Ubuntu 24.04, so you should use it too.
 You'll need to install a few Debian packages with the following commands:
+
 ```
 sudo apt-get update && sudo apt-get install -y build-essential valgrind python3 vim bash-completion git gdb python3-pip
 ```
