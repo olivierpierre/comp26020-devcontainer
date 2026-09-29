@@ -10,5 +10,6 @@ RUN pip3 install check50
 RUN rm /etc/apt/apt.conf.d/docker-clean
 
 COPY comp26020-devcontainer /root/
+RUN rm /root/.git
 
 WORKDIR /root
