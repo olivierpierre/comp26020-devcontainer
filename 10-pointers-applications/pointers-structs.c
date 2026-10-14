@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     my_struct *p = &ms;
 
     (*p).int_member1 = 1;
-    p->int_member2 = 2;   // s->x is a shortcut for (*s).x
+    p->int_member2 = 2;   // p->x is a shortcut for (*p).x
 
     p->ptr_member = &(p->int_member2);
 
