@@ -3,8 +3,8 @@
 #include "parser.h"
 
 /* These two function are internal and their prototype is not in the header */
-void internal_parsing_function1(request *r);
-void internal_parsing_function2(request *r);
+static void internal_parsing_function1(request *r);
+static void internal_parsing_function2(request *r);
 
 void parse_req(request *r) {
     internal_parsing_function1(r);
